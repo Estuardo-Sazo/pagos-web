@@ -24,11 +24,11 @@ public function get(){
 }
 
 public function set($data){
-    $sql= "INSERT INTO sales (type_payment,price,customer,user,status,start_date, start_time, balance ) VALUES(:type_payment, :price, :customer, :user, :status, :start_date, :start_time, :balance)";
-    $stmt= $this->connect()->prepare($sql);
-
+    $sql= "INSERT INTO sales(type_payment,price,customer,user,status,start_date, start_time,end_date, end_time, balance ) 
+                        VALUES(:type_payment, :price, :customer, :user, :status, :start_date, :start_time,:end_date, :end_time, :balance)";
+    $stmt= $this->connect()->prepare($sql);    
     $stmt->execute($data);
-
+    print_r($data);
     //Detectar error
     if($stmt->errorInfo()[2]!=null){
         $arr = $stmt->errorInfo();
@@ -36,6 +36,7 @@ public function set($data){
     }else{
         return 'ADD';      
     }
+    
 }
 
 public function put($data,$id){

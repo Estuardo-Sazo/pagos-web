@@ -11,6 +11,10 @@ body{
   .inpSearch{
     border-radius:15px
   }
+  .border-10{
+    border-radius:10px
+
+  }
 
   .btn-cliente{
     padding-left: 15%;

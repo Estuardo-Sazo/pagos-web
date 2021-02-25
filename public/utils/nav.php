@@ -14,7 +14,7 @@
         <a class="nav-link" href="../customers">Clientes</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Ventas</a>
+        <a class="nav-link" href="../sales">Ventas</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">Pagos</a>

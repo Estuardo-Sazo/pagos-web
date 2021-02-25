@@ -9,7 +9,7 @@ include_once('../../utils/nav.php');
 <div class="container">
     <div class="row">
         <div class="col-md-4 mt-2">
-            <a class="btn btnM btn-info btn-block btn-lg"  href="#"> 
+            <a class="btn btnM btn-info btn-block btn-lg"  href="../sales/new.php"> 
             Nueva Venta
             </a>
         </div>

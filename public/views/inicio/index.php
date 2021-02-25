@@ -5,11 +5,22 @@ cabecera('Inicio');
 include_once('../../utils/nav.php'); 
 
 ?>
+
 <div class="container">
     <div class="row">
         <div class="col-md-4 mt-2">
-            <a class="btn btn-info btn-block btn-lg"  href="#"> 
-            <div style="height:10hv" class="">Nueva Venta</div>
+            <a class="btn btnM btn-info btn-block btn-lg"  href="#"> 
+            Nueva Venta
+            </a>
+        </div>
+        <div class="col-md-4 mt-2">
+            <a class="btn btnM btn-primary btn-block btn-lg"  href="../customers"> 
+            <div  class="">Clientes</div>
+            </a>
+        </div>
+        <div class="col-md-4 mt-2">
+            <a class="btn btnM btn-success btn-block btn-lg"  href="#"> 
+            <div class="">Pagos Pendientes</div>
             </a>
         </div>
     </div>

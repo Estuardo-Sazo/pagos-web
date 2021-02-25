@@ -1,0 +1,18 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+    margin:0;
+  }
+  .btnM{
+      height:8vh;
+      border-radius:20px;
+      line-height: 7vh;
+    text-align: center;
+  }
+  .inpSearch{
+    border-radius:15px
+  }
+
+  .btn-cliente{
+    padding-left: 15%;
+    padding-right: 15%;
+  }

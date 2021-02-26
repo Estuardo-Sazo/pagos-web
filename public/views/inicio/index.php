@@ -5,12 +5,13 @@ cabecera('Inicio');
 include_once('../../utils/nav.php'); 
 
 ?>
-
-<div class="container">
+<a href="../sales/new.php" class="btn-flotante">Nueva Venta</a>
+<br>
+<div class="container mt-5">
     <div class="row">
         <div class="col-md-4 mt-2">
-            <a class="btn btnM btn-info btn-block btn-lg"  href="../sales/new.php"> 
-            Nueva Venta
+            <a class="btn btnM btn-info btn-block btn-lg"  href="../sales"> 
+            Ventas
             </a>
         </div>
         <div class="col-md-4 mt-2">

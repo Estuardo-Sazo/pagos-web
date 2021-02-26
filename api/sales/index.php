@@ -14,7 +14,9 @@ if ($REQUETS == 'GET') {
     $r; /// Variable para enviar la respuesta a la peticion
     if (isset($_GET['id'])) {
         $r = $ob->getId($_GET['id']);
-    } else {
+    }else if (isset($_GET['status'])) {
+        $r = $ob->getStatus($_GET['status']);
+    }  else {
         $r = ($ob->get());
         if($r==null){
             $r=[];

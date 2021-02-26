@@ -23,12 +23,24 @@ public function get(){
     }
 }
 
+ // Get 
+ public function getStatus($st){
+    $sql= "SELECT s.id , s.status,s.price,s.start_date,s.balance,c.name as customer,t.name as type_payment FROM sales s
+            JOIN customers c on c.id=s.customer
+            JOIN types_payments t on t.id=s.type_payment
+            WHERE s.status=? order by s.start_date DESC";
+    $stmt= $this->connect()->prepare($sql);
+    $stmt->execute([$st]);
+    while($result = $stmt->fetchAll()){
+        return $result;
+    }
+}
+
 public function set($data){
     $sql= "INSERT INTO sales(type_payment,price,customer,user,status,start_date, start_time,end_date, end_time, balance ) 
                         VALUES(:type_payment, :price, :customer, :user, :status, :start_date, :start_time,:end_date, :end_time, :balance)";
     $stmt= $this->connect()->prepare($sql);    
     $stmt->execute($data);
-    print_r($data);
     //Detectar error
     if($stmt->errorInfo()[2]!=null){
         $arr = $stmt->errorInfo();

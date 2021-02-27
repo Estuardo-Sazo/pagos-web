@@ -5,9 +5,38 @@ cabecera('Venta');
 include_once('../../utils/nav.php'); 
 
 ?>
-<a href="new.php" class="btn-flotante">Registar Pago</a>
 
-<input type="hidden" id="idC" value="<?= $_GET['id']?>" ; <br>
+<div class="modal fade" id="modalPago" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Registrar pago</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form id="frm-pago">
+            <div class="form-group">
+             <label for="pago">Pago:</label>
+             <input class="form-control" type="number" name="payment" id="payment">
+             <input  type="hidden" name="current" id="payment">
+             <input type="hidden" id="idC" name="sale" value="<?= $_GET['id']?>">
+             <input type="hidden" id="current" name="current" >
+
+            </div>
+            <button class="btn btn-info btn-block"type="submit">Registrar</button>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<span id="btnPagar"></span>
+
+<input type="hidden" id="idC" value="<?= $_GET['id']?>">
 <div class="container mt-5">
 
     <div class="row justify-content-center" id="data">

@@ -19,11 +19,7 @@ include_once('../../utils/nav.php');
             <div  class="">Clientes</div>
             </a>
         </div>
-        <div class="col-md-4 mt-2">
-            <a class="btn btnM btn-success btn-block btn-lg"  href="#"> 
-            <div class="">Pagos Pendientes</div>
-            </a>
-        </div>
+        
     </div>
 </div>
 

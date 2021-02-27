@@ -37,7 +37,7 @@ public function get(){
         $sql= "SELECT s.id , s.status,s.price,s.start_date,s.balance,c.name as customer,t.name as type_payment FROM sales s
         JOIN customers c on c.id=s.customer
         JOIN types_payments t on t.id=s.type_payment
-        WHERE s.status=? order by s.start_date DESC";
+        WHERE s.status=? order by s.start_date,s.start_time DESC";
      }
     
     $stmt= $this->connect()->prepare($sql);
@@ -52,7 +52,7 @@ public function getSearch($q){
        $sql= "SELECT s.id , s.status,s.price,s.start_date,s.balance,c.name as customer,t.name as type_payment FROM sales s
        JOIN customers c on c.id=s.customer
        JOIN types_payments t on t.id=s.type_payment
-       WHERE  (c.name LIKE '%$q%') OR (s.start_date LIKE '%$q%') OR (c.uuid LIKE '%$q%') order by s.start_date DESC";   
+       WHERE  (c.name LIKE '%$q%') OR (s.start_date LIKE '%$q%') OR (c.uuid LIKE '%$q%') order by s.start_date,s.status DESC";   
    
    $stmt= $this->connect()->prepare($sql);
    $stmt->execute();
@@ -76,18 +76,17 @@ public function set($data){
     
 }
 
-public function put($data,$id){
+public function put($data,$sale){
     $key='';
-    $i= count($_POST);
+    $i= count($data);
     $t=0; 
-    foreach ($_POST as $k => $v)
+    foreach ($data as $k => $v)
     {
         $t++;
         $c=($t==$i)?'':',';
         $key=$key.$k.'='.':'.$k.$c;
     }
-   
-    $sql= "UPDATE sales SET $key  WHERE id=$id";
+    $sql= "UPDATE sales SET $key  WHERE id=$sale";
     $stmt= $this->connect()->prepare($sql);
     $stmt->execute($data);
 

@@ -45,7 +45,8 @@ if ($REQUETS == 'PUT') {
     // Almacenamos las respuesta de app cliente
     $_POST = json_decode(file_get_contents('php://input'), true);
     if(isset($_GET['id'])){
-        $r = $ob->put($_POST,$_GET['id']);    
+        $id=$_GET['id'];
+        $r = $ob->put($_POST,$id);    
         $result['body'] = $r;
         $rpt = json_encode($result);
     }else{

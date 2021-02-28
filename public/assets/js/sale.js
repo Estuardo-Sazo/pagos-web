@@ -105,8 +105,8 @@ $('#frm-pago').submit(function(e) {
         .then((response) => response.json())
         .then((data) => {
             if (data != null) {
-                fetch(urlSale + '?id=' + id, {
-                        method: "PUT",
+                fetch(urlSale + '?PUT=&id=' + id, {
+                        method: "POST",
                         headers: {
                             "Content-Type": "application/json",
                         },

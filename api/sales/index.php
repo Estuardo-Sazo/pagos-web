@@ -31,13 +31,28 @@ if ($REQUETS == 'GET') {
 
 //Si el request es de tipo POST
 if ($REQUETS == 'POST') {
-    // Almacenamos las respuesta de app cliente
-    $_POST = json_decode(file_get_contents('php://input'), true);
-    $r = $ob->set($_POST);
-    $result['body'] = $r;
-    $rpt = json_encode($result);
 
+    if(isset($_GET['PUT'])){
+        $_POST = json_decode(file_get_contents('php://input'), true);
+        if(isset($_GET['id'])){
+            $id=$_GET['id'];
+            $r = $ob->put($_POST,$id);    
+            $result['body'] = $r;
+            $rpt = json_encode($result);
+        }else{
+            $result['ERROR'] = 'Need Id';
+            $rpt = json_encode($result);
+        }
+    }else{
+        // Almacenamos las respuesta de app cliente
+        $_POST = json_decode(file_get_contents('php://input'), true);
+        $r = $ob->set($_POST);
+        $result['body'] = $r;
+        $rpt = json_encode($result);
+
+    }
     echo $rpt;
+   
 }
 
 //Si el request es de tipo PUT

@@ -7,6 +7,12 @@ class Base {
    private $pwd="";
    private $dbName="pagos_app";
 
+/* Servidor */
+   /* private $host="localhost";
+   private $user="root";
+   private $pwd="";
+   private $dbName="pagos_app";
+ */
    public function connect(){
        $dns='mysql:host='.$this->host . ';dbname='. $this->dbName;
        $pdo= new PDO($dns,$this->user, $this->pwd);

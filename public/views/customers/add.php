@@ -13,6 +13,9 @@ include_once('../../utils/nav.php');
     <div class="row">
         <div class="col-md-4">
             <form action="" id="newCustomer">
+                <input type="hidden" name="id_user" id="id_user" class="form-control" value="<?= $_SESSION['id_user']?>"
+                    required>
+
                 <div class="form-group">
                     <label for="name">Nombre:</label>
                     <input type="text" name="name" id="name" class="form-control" required>

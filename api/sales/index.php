@@ -12,19 +12,25 @@ $ob = new DaoSales;
 //Si el request es de tipo GET
 if ($REQUETS == 'GET') {
     $r; /// Variable para enviar la respuesta a la peticion
-    if (isset($_GET['id'])) {
-        $r = $ob->getId($_GET['id']);
+    if (isset($_GET['user'])) {
+        if (isset($_GET['st'])) {
+            $r = $ob->getStatus($_GET['st'],$_GET['id'],$_GET['user']);
+        }else  if (isset($_GET['id'])) {
+        $r = $ob->saleForId($_GET['id'],$_GET['user']);
     }else if (isset($_GET['search'])) {
         $r = $ob->getSearch($_GET['search']);
     
-    }else if (isset($_GET['status'])) {
-        $r = $ob->getStatus($_GET['status']);
-    }  else {
+    }else if (isset($_GET['customer'])) {
+        $r = $ob->salesForConstumers($_GET['status'],$_GET['user']);
+    } else {
         $r = ($ob->get());
         if($r==null){
             $r=[];
         }
     }
+}else{
+    $r['message'] ='Need Id User';
+}
 
     echo json_encode($r);
 }

@@ -8,10 +8,11 @@ class Base {
    private $dbName="pagos_app";
 
 /* Servidor */
-   /* private $host="localhost";
-   private $user="root";
-   private $pwd="";
-   private $dbName="pagos_app";
+   /*  private $host="localhost";
+   private $user="id16259712_admin";
+   private $pwd="@Estuardo1206";
+   private $dbName="id16259712_pagos_web";
+ 
  */
    public function connect(){
        $dns='mysql:host='.$this->host . ';dbname='. $this->dbName;

@@ -35,4 +35,17 @@ public function set($data){
     }
 }
 
+public function put($data){
+    $sql= "UPDATE users SET name=:name,username=:username,password=:password WHERE id=:id";
+    $stmt= $this->connect()->prepare($sql);
+    $stmt->execute($data);
+    //Detectar error
+    if($stmt->errorInfo()[2]!=null){
+        $arr = $stmt->errorInfo();
+        return $arr;
+    }else{
+        return 'EDIT';      
+    }
+}
+
 }

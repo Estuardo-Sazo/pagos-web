@@ -1,7 +1,5 @@
 <?php
-
 include_once('include/connect.php');
-
 class DaoSales extends Base{
     // Get 
 public function get(){
@@ -27,21 +25,40 @@ public function get(){
 }
 
  // Get 
- public function getStatus($st){
-     if($st==3){
+ public function getStatus($st,$id,$user){
+     
         $sql= "SELECT s.id , s.status,s.price,s.start_date,s.balance,c.name as customer,t.name as type_payment FROM sales s
         JOIN customers c on c.id=s.customer
         JOIN types_payments t on t.id=s.type_payment
-        order by s.start_date DESC";
-     }else{
-        $sql= "SELECT s.id , s.status,s.price,s.start_date,s.balance,c.name as customer,t.name as type_payment FROM sales s
-        JOIN customers c on c.id=s.customer
-        JOIN types_payments t on t.id=s.type_payment
-        WHERE s.status=? order by s.start_date,s.start_time DESC";
-     }
+        WHERE s.status=? AND c.id=? AND c.id_user=? order by s.start_date DESC";
+     
     
     $stmt= $this->connect()->prepare($sql);
-    $stmt->execute([$st]);
+    $stmt->execute([$st,$id,$user]);
+    while($result = $stmt->fetchAll()){
+        return $result;
+    }
+}
+
+public function salesForConstumers($status,$user){
+    $sql= "SELECT c.id , c.status,SUM(s.balance)as balance,c.name as customer FROM sales s
+    JOIN customers c on c.id=s.customer       
+    WHERE c.status=? AND s.status=1 AND c.id_user=? group by c.id;";
+
+    $stmt= $this->connect()->prepare($sql);
+    $stmt->execute([$status,$user]);
+    while($result = $stmt->fetchAll()){
+        return $result;
+    }
+}
+
+public function saleForId($id,$user){
+    $sql= "SELECT c.id , c.status,SUM(s.balance)as balance,c.name as customer FROM sales s
+    JOIN customers c on c.id=s.customer       
+    WHERE c.id=? AND c.id_user=? group by c.id;";
+
+    $stmt= $this->connect()->prepare($sql);
+    $stmt->execute([$id,$user]);
     while($result = $stmt->fetchAll()){
         return $result;
     }

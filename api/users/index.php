@@ -55,3 +55,15 @@ if ($REQUETS == 'POST') {
 
     echo $rpt;
 }
+
+//Si el request es de tipo PUT
+if ($REQUETS == 'PUT') {
+        // Almacenamos las respuesta de app cliente
+        $_POST = json_decode(file_get_contents('php://input'), true);
+        $_POST['password'] = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $r = $ob->put($_POST);
+        $result['body'] = $r;
+        $rpt = json_encode($result);   
+
+    echo $rpt;
+}

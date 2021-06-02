@@ -1,7 +1,8 @@
 const url = "../../../api/users/";
 //Login
 
-console.log("listo");
+localStorage.setItem('id', 'null');
+localStorage.setItem('nombre', 'null');
 $("#login").submit(function(e) {
     const data = {
         username: $("#username").val(),
@@ -18,9 +19,21 @@ $("#login").submit(function(e) {
         .then((response) => response.json())
         .then((data) => {
             if (data.id) {
+                localStorage.setItem('id', data.id);
+                localStorage.setItem('nombre', data.name);
+
                 location.href = "../inicio";
             } else {
-                console.log(data);
+                $("#username").val('');
+                $("#password").val('');
+                $('#Error').html(`
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>Error en los datos!</strong> Verifica que todos los datos esten correctos.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                `);
             }
         });
     e.preventDefault();

@@ -12,10 +12,17 @@ $ob = new DaoCostumers;
 //Si el request es de tipo GET
 if ($REQUETS == 'GET') {
     $r; /// Variable para enviar la respuesta a la peticion
-    if (isset($_GET['id'])) {
-        $r = $ob->getId($_GET['id']);
-    } else {
-        $r = ($ob->get());
+    if (isset($_GET['user'])) {
+        if (isset($_GET['id'])) {
+            $r = $ob->getId($_GET['id']);
+        } else
+        if(isset($_GET['status'])){
+            $r = $ob->getStatus($_GET['user'],$_GET['status']);        
+        } else {
+            $r = ($ob->get($_GET['user']));
+        }
+    }else{
+        $r['message'] ='Need Id User';
     }
 
     echo json_encode($r);
@@ -39,11 +46,15 @@ if ($REQUETS == 'DELETE') {
 //Si el request es de tipo POST
 if ($REQUETS == 'POST') {
     // Almacenamos las respuesta de app cliente
+    
     $_POST = json_decode(file_get_contents('php://input'), true);
+    if(isset($_POST['id_user'])) {
     $r = $ob->set($_POST);
     $result['body'] = $r;
     $rpt = json_encode($result);
-
+    }else{
+        $rpt['ERROR'] = 'Need ID';
+    }
     echo $rpt;
 }
 

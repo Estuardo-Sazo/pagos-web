@@ -13,18 +13,19 @@ cabecera('Inicio de Sesión');
                 <div class="card-body">
                     <h4 class="card-title text-center">Inicio de Sesión</h4>
                     <form id="login">
-                    <div class="form-group">
-                        <label for="username">Usuario:</label>
-                        <input type="text" class="form-control" id="username" placeholder="Usuario">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Contraseña:</label>
-                        <input type="password" class="form-control" id="password" placeholder="Contraseña">
-                    </div>
-                    <button type="submit" class="btn btn-info btn-block">Ingresar</button>
+                        <div class="form-group">
+                            <label for="username">Usuario:</label>
+                            <input type="text" class="form-control" id="username" placeholder="Usuario">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Contraseña:</label>
+                            <input type="password" class="form-control" id="password" placeholder="Contraseña">
+                        </div>
+                        <button type="submit" class="btn btn-info btn-block">Ingresar</button>
                     </form>
                 </div>
             </div>
+            <div id="Error"></div>
         </div>
     </div>
 </div>

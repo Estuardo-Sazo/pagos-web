@@ -4,15 +4,26 @@ include_once('include/connect.php');
 
 class DaoCostumers extends Base{
     // Get 
-public function get(){
-    $sql= "SELECT * FROM customers";
+public function get($user){
+    $sql= "SELECT * FROM customers WHERE id_user=?";
     $stmt= $this->connect()->prepare($sql);
-    $stmt->execute();
+    $stmt->execute([$user]);
 
     while($result = $stmt->fetchAll()){
         return $result;
     }
 }
+
+    // Get 
+    public function getStatus($user,$status){
+        $sql= "SELECT * FROM customers WHERE status=? AND id_user=?";
+        $stmt= $this->connect()->prepare($sql);
+        $stmt->execute([$status,$user]);
+    
+        while($result = $stmt->fetchAll()){
+            return $result;
+        }
+    }
 
    // Get id
    public function getId($id){
@@ -38,7 +49,7 @@ public function get(){
 
 
 public function set($data){
-    $sql= "INSERT INTO customers (name,address,uuid,description,phone,type_customer) VALUES(:name,:address,:uuid,:description,:phone,:type_customer)";
+    $sql= "INSERT INTO customers (name,address,uuid,description,phone,type_customer,id_user) VALUES(:name,:address,:uuid,:description,:phone,:type_customer,:id_user)";
     $stmt= $this->connect()->prepare($sql);
 
     $stmt->execute($data);

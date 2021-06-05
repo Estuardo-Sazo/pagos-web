@@ -12,13 +12,13 @@ public function get(){
 }
 
    // Get ID
-   public function getId($id){
+   public function getId($id,$user){
     $sql= "SELECT s.id , s.status,s.price,s.start_date,s.balance,c.name as customer,t.name as type_payment FROM sales s
             JOIN customers c on c.id=s.customer
             JOIN types_payments t on t.id=s.type_payment 
-            WHERE s.id=?";
+            WHERE s.id=? AND c.id_user=?";
     $stmt= $this->connect()->prepare($sql);
-    $stmt->execute([$id]);
+    $stmt->execute([$id,$user]);
     while($result = $stmt->fetchAll()){
         return $result;
     }

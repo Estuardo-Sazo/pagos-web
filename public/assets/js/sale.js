@@ -1,13 +1,15 @@
 const urlSale = "../../../api/sales/";
 const urlPay = "../../../api/payment_detail/";
+const idUser = localStorage.getItem('id');
+const idS = $('#idC').val();
 var f = new Date();
 
 
-getSale($('#idC').val());
-listPagos($('#idC').val());
+getSale(idS, idUser);
+listPagos(idS);
 
-function getSale(id) {
-    fetch(urlSale + '?id=' + id, {
+function getSale(id, user) {
+    fetch(urlSale + '?user=' + user + '&forId=' + id, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -15,7 +17,7 @@ function getSale(id) {
         })
         .then((response) => response.json())
         .then((data) => {
-            if (data[0].balance > 0) {
+            if (parseInt(data[0].balance) > 0) {
                 $('#btnPagar').html('<a data-toggle="modal" data-target="#modalPago" class="btn-flotante">Registar Pago</a>');
             } else {
                 $('#btnPagar').html('');
@@ -58,14 +60,14 @@ function listData(data) {
             let cl = d.balance > 0 ? 'text-danger' : 'text-success';
             $('#current').val(d.balance);
             template += `
-                    <div class="col-md-6 mt-1">
+                    <div class="col-md-6 mt-3">
                         <div class="card border-black mb-3" >
                             <div class="card-body pt-1 pb-1">
-                                <h4 class="text-center">${d.customer}</h4>
+                                <h4 class="text-center">${d.type_payment}</h4>
                                 <div class="row">
                                     <div class="col-7">
                                         <p class="card-text m-0">${d.start_date}</p>
-                                        <p class="card-text m-0">${d.type_payment}</p>
+                                        <p class="card-text m-0">${d.customer}</p>
                                         <p class="card-text m-0">Precio: Q${d.price}</p>
                                     </div>
                                     <div class="col-5 ${cl}">
@@ -116,8 +118,9 @@ $('#frm-pago').submit(function(e) {
                     .then((data) => {
                         $('#modalPago').modal('hide');
                         $('#payment').val();
-                        getSale(id);
-                        listPagos(id);
+                        getSale(idS, idUser);
+                        listPagos(idS);
+
                     });
             } else {
                 console.log(data);

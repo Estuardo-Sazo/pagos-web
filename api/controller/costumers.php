@@ -78,5 +78,19 @@ public function put($data){
 
 }
 
+public function putStatus($status,$id){
+    $sql= "UPDATE  customers SET status=? WHERE id=?";
+    $stmt= $this->connect()->prepare($sql);
+    $stmt->execute([$status,$id]);
+
+    //Detectar error
+    if($stmt->errorInfo()[2]!=null){
+        $arr = $stmt->errorInfo();
+        return $arr;
+    }else{
+        return 'UPDATED';      
+    }
+}
+
 
 }

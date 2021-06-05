@@ -18,7 +18,7 @@ if ($REQUETS == 'GET') {
         } else
         if(isset($_GET['status'])){
             $r = $ob->getStatus($_GET['user'],$_GET['status']);        
-        } else {
+        } else{
             $r = ($ob->get($_GET['user']));
         }
     }else{
@@ -45,25 +45,48 @@ if ($REQUETS == 'DELETE') {
 
 //Si el request es de tipo POST
 if ($REQUETS == 'POST') {
-    // Almacenamos las respuesta de app cliente
-    
-    $_POST = json_decode(file_get_contents('php://input'), true);
-    if(isset($_POST['id_user'])) {
-    $r = $ob->set($_POST);
-    $result['body'] = $r;
-    $rpt = json_encode($result);
+    $rpt ='';
+    if(isset($_GET['newStatus'])){
+        $r = $ob->putStatus($_GET['newStatus'],$_GET['user']);
+        if ($r == null) {
+            $result['ERROR'] = $r;
+        }else{
+            
+            $result['body'] = 'STATUS UPDATED';
+        }
+
     }else{
-        $rpt['ERROR'] = 'Need ID';
-    }
+            // Almacenamos las respuesta de app cliente
+            
+            $_POST = json_decode(file_get_contents('php://input'), true);
+            if(isset($_POST['id_user'])) {
+            $r = $ob->set($_POST);
+            $result['body'] = $r;
+            
+            }else{
+                $rpt['ERROR'] = 'Need ID';
+        }
+    }    
+$rpt = json_encode($result);
     echo $rpt;
 }
 
-//Si el request es de tipo POST
+//Si el request es de tipo PUT
 if ($REQUETS == 'PUT') {
-    // Almacenamos las respuesta de app cliente
-    $_POST = json_decode(file_get_contents('php://input'), true);
-    $r = $ob->put($_POST);
-    $result['body'] = $r;
+    $rpt ='';
+    if(isset($_GET['newStatus'])){
+        /* $r = $ob->putStatus($_GET['user'],$_GET['newStatus']);
+        if ($r == null) {
+            $r['body'] = 'Deleted';
+        } */
+        $result['body'] = 'STATUS UPDATED';
+    }else{
+        
+        // Almacenamos las respuesta de app cliente
+        $_POST = json_decode(file_get_contents('php://input'), true);
+        $r = $ob->put($_POST);
+        $result['body'] = $r;
+    }
     $rpt = json_encode($result);
 
     echo $rpt;

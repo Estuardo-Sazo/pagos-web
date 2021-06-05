@@ -26,8 +26,8 @@ include_once('../../utils/nav.php');
                     </thead>
 
                     <tbody id="listClientes">
-                        
-                       
+
+
                     </tbody>
 
                 </table>
@@ -49,7 +49,7 @@ include_once('../../utils/nav.php');
                 </button>
             </div>
             <div class="modal-body">
-            <table class="table table-striped">
+                <table class="table table-striped">
                     <thead>
                         <tr>
                             <th>Nombre</th>
@@ -58,13 +58,13 @@ include_once('../../utils/nav.php');
                     </thead>
 
                     <tbody id="listProducto">
-                        
-                       
+
+
                     </tbody>
 
                 </table>
             </div>
-            
+
         </div>
     </div>
 </div>
@@ -72,20 +72,22 @@ include_once('../../utils/nav.php');
 <h2 align="center">Nueva Venta</h2>
 <hr>
 
+<input type="hidden" id="idC" value="<?= isset($_GET['customer'])?$_GET['customer']:""?>">
+
 <div class="container">
     <div class="row">
         <div class="col-md-4">
             <form action="" id="newSale">
                 <div class="form-group">
-                    <a class="btn btn-dark m-2 border-10" data-toggle="modal"
-                        data-target="#modalCliente "id="selCLiente">Selecionar Cliente</a>
-                    <input type="text" id="cliente" class="form-control"  disabled>
-                        <input type="hidden" name="customer" id="customer">
+                    <a class="btn btn-dark m-2 border-10" data-toggle="modal" data-target="#modalCliente "
+                        id="selCLiente">Selecionar Cliente</a>
+                    <input type="text" id="cliente" class="form-control" disabled>
+                    <input type="hidden" name="customer" id="customer">
 
                 </div>
                 <div class="form-group">
-                    <a class="btn btn-dark m-2 border-10" data-toggle="modal"
-                        data-target="#modalProducto" id="selectPro">Seleccionar Producto</a>
+                    <a class="btn btn-dark m-2 border-10" data-toggle="modal" data-target="#modalProducto"
+                        id="selectPro">Seleccionar Producto</a>
                     <input type="text" id="producto" class="form-control" disabled>
                 </div>
                 <div class="form-group">
@@ -94,10 +96,15 @@ include_once('../../utils/nav.php');
                     <input type="hidden" name="price" id="price">
                     <input type="hidden" name="type_payment" id="type_payment">
                 </div>
+                <div class="form-group">
+                    <label for="precio">Fecha:</label>
+                    <input type="date" id="date" class="form-control">
+
+                </div>
                 <input type="hidden" name="user" value="<?= $_SESSION['id_user']?>">
 
                 <button id="pago" class="btn btn-primary btn-block">Pago</button>
-                <button  id="credito" class="btn btn-warning btn-block">Credito</button>
+                <button id="credito" class="btn btn-warning btn-block">Credito</button>
 
             </form>
         </div>

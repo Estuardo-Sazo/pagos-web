@@ -1,7 +1,7 @@
 <?php
 include_once('../../utils/validate_session.php'); 
 include_once('../../utils/header.php'); 
-cabecera('Venta');
+cabecera('Clientes');
 include_once('../../utils/nav.php'); 
 
 ?>
@@ -36,6 +36,7 @@ include_once('../../utils/nav.php');
 
 
 <span id="btnPagar"></span>
+<a href="../sales/new.php?customer=<?= $_GET['id']?>" class="btn-flotante">Nueva Venta</a>
 
 <input type="hidden" id="idC" value="<?= $_GET['id']?>">
 <div class="container mt-5">
@@ -53,14 +54,14 @@ include_once('../../utils/nav.php');
                         aria-controls="home" aria-selected="true">Pagos pendientes</a>
                 </li>
                 <li class="nav-item" role="presentation">
-                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                    <a class="nav-link" id="SalesC-tab" data-toggle="tab" href="#SalesC" role="tab"
                         aria-controls="profile" aria-selected="false">Pagos Completos</a>
                 </li>
 
             </ul>
             <div class="tab-content" id="myTabContent">
                 <div class="tab-pane fade show active" id="Sales1" role="tabpanel" aria-labelledby="sale1-tab"></div>
-                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
+                <div class="tab-pane fade" id="SalesC" role="tabpanel" aria-labelledby="SalesC-tab"></div>
             </div>
         </div>
     </div>

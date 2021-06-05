@@ -51,7 +51,7 @@ function getCustomers() {
                         <p class="card-text m-0">Referencia: ${d.uuid} </p>
                         <p class="card-text m-0">Estado: ${d.status==0?st1:st0}</p>
                         <p class="btn-cliente mt-1">
-                            <a href="view.php?id=${d.id}" class="btn btn-success btn-block ">Ver</a>
+                            <a href="detail.php?id=${d.id}" class="btn btn-success btn-block ">Ver</a>
                         </p>
                     </div>
                 </div>

@@ -1,13 +1,19 @@
 const urlSale = "../../../api/sales/";
+const urlConstumer = "../../../api/customers/";
+
 const idUser = localStorage.getItem('id');
 const idC = $('#idC').val();
 
 getSale(idC, idUser);
 
-getStatus(1, idC, idUser);
+//Listamos Ventas Pendientes
+getStatus(1, idC, idUser, '#Sales1');
+//Listamos Ventas Completas
+getStatus(0, idC, idUser, '#SalesC');
 
-function getStatus(st, id, user) {
 
+//muestra lista de pagos pendientes
+function getStatus(st, id, user, ref) {
     fetch(urlSale + '?st=' + st + '&user=' + user + '&id=' + id, {
             method: "GET",
             headers: {
@@ -17,7 +23,14 @@ function getStatus(st, id, user) {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
-            listSales(data);
+            if (data != null) {
+                listSales(data, ref);
+
+            } else {
+                //getCustomer(id);
+                updateStatusCustomer(0, idC);
+            }
+
         });
 }
 
@@ -31,11 +44,20 @@ function getSale(id, user) {
         })
         .then((response) => response.json())
         .then((data) => {
-            console.log(data);
-            listData(data);
+            if (data != null) {
+                if (data[0].status == 0) {
+                    updateStatusCustomer(1, idC)
+                }
+                console.log(data);
+                listData(data);
+
+            } else {
+                updateStatusCustomer(0, idC)
+
+            }
         });
 }
-
+/* 
 function getSales(id) {
     fetch(urlSale + '?id=' + id, {
             method: "GET",
@@ -52,7 +74,7 @@ function getSales(id) {
             }
             listData(data);
         });
-}
+} */
 
 function listData(data) {
 
@@ -82,10 +104,10 @@ function listData(data) {
 }
 
 function viewVenta(id) {
-    location.href = "../sales/sale.php?id=" + id;
+    location.href = "../sales/sale.php?id=" + id + '&customer=' + idC;
 }
 
-function listSales(data) {
+function listSales(data, ref) {
     let template = '';
     if (data != null) {
         data.forEach(d => {
@@ -113,5 +135,40 @@ function listSales(data) {
                     `
         });
     }
-    $('#Sales1').html(template);
+    $(ref).html(template);
+}
+
+function updateStatusCustomer(status, user) {
+    fetch(urlConstumer + '?newStatus=' + status + '&user=' + user, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+
+        });
+}
+
+function getCustomer(id) {
+    fetch(urlConstumer + '?id=' + id + '&user=' + idUser, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data);
+            if (data[0].status == 0) {
+                data[0].balance = 0;
+                data[0].customer = data[0].name;
+            } else {
+                data[0].balance = 50;
+                data[0].customer = data[0].name;
+            }
+            listData(data)
+        });
 }

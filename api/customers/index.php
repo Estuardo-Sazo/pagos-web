@@ -52,7 +52,7 @@ if ($REQUETS == 'POST') {
             $result['ERROR'] = $r;
         }else{
             
-            $result['body'] = 'STATUS UPDATED';
+            $result['body'] = 'STATUS UPDATED STATUS='.$_GET['newStatus'].' USER='.$_GET['user'];
         }
 
     }else{

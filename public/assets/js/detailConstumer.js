@@ -4,12 +4,16 @@ const urlConstumer = "../../../api/customers/";
 const idUser = localStorage.getItem('id');
 const idC = $('#idC').val();
 
+var balance = 0;
+
 getSale(idC, idUser);
 
 //Listamos Ventas Pendientes
 getStatus(1, idC, idUser, '#Sales1');
 //Listamos Ventas Completas
 getStatus(0, idC, idUser, '#SalesC');
+
+
 
 
 //muestra lista de pagos pendientes
@@ -23,13 +27,12 @@ function getStatus(st, id, user, ref) {
         .then((response) => response.json())
         .then((data) => {
             console.log(data);
+           
             if (data != null) {
-                listSales(data, ref);
-
+                listSales(data, ref); 
             } else {
-                //getCustomer(id);
-                updateStatusCustomer(0, idC);
-            }
+                getCustomer(idC);
+                }
 
         });
 }
@@ -44,37 +47,23 @@ function getSale(id, user) {
         })
         .then((response) => response.json())
         .then((data) => {
+            console.log(data);
             if (data != null) {
-                if (data[0].status == 0) {
-                    updateStatusCustomer(1, idC)
-                }
-                console.log(data);
-                listData(data);
 
-            } else {
-                updateStatusCustomer(0, idC)
+                if (data[0].status == 0 && parseInt(data[0].balance) > 0) {
+                    updateStatusCustomer(1, idC);
+                } else if (data[0].status == 1 && parseInt(data[0].balance) == 0) {
+
+                    updateStatusCustomer(0, idC);
+                    
+                }
+                listData(data);
+                
 
             }
         });
 }
-/* 
-function getSales(id) {
-    fetch(urlSale + '?id=' + id, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data[0].balance > 0) {
-                $('#btnPagar').html('<a data-toggle="modal" data-target="#modalPago" class="btn-flotante">Registar Pago</a>');
-            } else {
-                $('#btnPagar').html('');
-            }
-            listData(data);
-        });
-} */
+
 
 function listData(data) {
 
@@ -91,7 +80,7 @@ function listData(data) {
                                     
                                     <div class="col-12 ${cl}">
                                         <h5 align="center">Saldo</h5>
-                                        <h3 align="center" >Q${d.balance}</h3>
+                                        <h3 align="center" >Q${parseInt(d.balance).toFixed(2)}</h3>
                                     </div>
                                 </div>
                             </div>
@@ -163,12 +152,19 @@ function getCustomer(id) {
         .then((data) => {
             console.log(data);
             if (data[0].status == 0) {
-                data[0].balance = 0;
+                data[0].balance = 0.00;
                 data[0].customer = data[0].name;
             } else {
-                data[0].balance = 50;
+                data[0].balance = 50.00;
                 data[0].customer = data[0].name;
             }
             listData(data)
         });
+}
+
+function validacionBalance() {
+    if (balance > 0) {
+        console.log('Deuda :'+balance);
+        updateStatusCustomer(1, idC);
+    }
 }

@@ -10,16 +10,22 @@ include_once('../../utils/nav.php');
 <div class="container mt-5">
     <div class="row">
         <div class="col-md-4 mt-2">
-            <a class="btn btnM btn-info btn-block btn-lg"  href="../sales"> 
-            Ventas
+            <a class="btn btnM btn-info btn-block btn-lg" href="../sales">
+                Ventas
             </a>
         </div>
         <div class="col-md-4 mt-2">
-            <a class="btn btnM btn-primary btn-block btn-lg"  href="../customers"> 
-            <div  class="">Clientes</div>
+            <a class="btn btnM btn-primary btn-block btn-lg" href="../customers">
+                Clientes
             </a>
         </div>
-        
+        <div class="col-md-4 mt-2">
+            <a class="btn btnM btn-secondary btn-block btn-lg" href="../types-payments">
+                Articulos
+
+            </a>
+        </div>
+
     </div>
 </div>
 

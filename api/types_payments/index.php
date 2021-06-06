@@ -15,8 +15,11 @@ if($REQUETS=='GET'){
 
     if(isset($_GET['id'])){
         $result['message']="Methd GET:ID";
+    }else if(isset($_GET['user'])){
+        $r= json_encode($types_payments->get($_GET['user']));
     }else{
-        $r= json_encode($types_payments->get());
+        $result['message']="Need User Id!";
+        $r= json_encode($result);
     }
     
     echo $r;

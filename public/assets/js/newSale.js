@@ -25,7 +25,7 @@ if ($('#idC').val() != "") {
 }
 
 $('#selectPro').click(function() {
-    fetch(urlProducto, {
+    fetch(urlProducto + '?user=' + idUser, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -35,16 +35,19 @@ $('#selectPro').click(function() {
         .then((data) => {
             let template = '';
             let price = 0;
-            data.forEach(d => {
-                price = typeClient == 1 ? d.price_two : d.price_one;
-                template += `
+            console.log(data);
+            if (data != null) {
+                data.forEach(d => {
+                    price = typeClient == 1 ? d.price_two : d.price_one;
+                    template += `
                 <tr onClick="selectProduct(${d.id},${price},'${d.name}')">
                     <td>${d.name}</td>
                     <td>Q.${price}</td>
                 </tr>
             `;
-            });
-            $('#listProducto').html(template);
+                });
+                $('#listProducto').html(template);
+            }
         });
 });
 

@@ -1,6 +1,6 @@
 const url = "../../../api/sales/";
 const idUser = localStorage.getItem('id');
-
+var total = 0;
 getStatus(1);
 
 function getStatus(st) {
@@ -40,6 +40,7 @@ function listData(data) {
     if (data != null) {
         data.forEach(d => {
             let cl = d.balance > 0 ? 'text-danger' : 'text-success';
+            total = total + parseFloat(d.balance);
             template += `
                     <div class="col-md-6 mt-1 col-lg-4">
                         <div class="card border-black mb-3" onclick="viewVenta(${d.id})">
@@ -59,4 +60,6 @@ function listData(data) {
         });
     }
     $('#listSales').html(template);
+    $('#total').html('Q'+total.toFixed(2));
+
 }

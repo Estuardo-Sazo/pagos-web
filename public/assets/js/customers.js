@@ -43,7 +43,7 @@ function getCustomers() {
             data.forEach(d => {
                 template += `
             <div class="col-md-4 mt-2">
-                <div class="card border-light mb-3">
+                <div class="card border-light  shadow p-3 mb-2 bg-white rounded">
                     <div class="card-body">
                         <h4 class="card-title">${d.name}</h4>
                         <p class="card-text m-0">Dirección: ${d.address}</p>

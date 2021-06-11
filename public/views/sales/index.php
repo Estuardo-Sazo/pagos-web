@@ -10,24 +10,22 @@ include_once('../../utils/nav.php');
 
 <br>
 <div class="container mt-5">
-    <h2 align="center">Ventas</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <h2 align="center">Ventas</h2>
+        </div>
+        <div class="col-md-6">
+            <h3 align="center">Total: <span id="total" class="badge badge-dark">Q500</span></h3>
+        </div>
+    </div>
     <hr>
     <div class="row m-2 justify-content-center">
         <div class="col-md-4">
-            <input type="search" class="form-control form-control-sm border-info " id="search" placeholder="Buscar (Saldo, cliente, referencia, fecha)">
+            <input type="search" class="form-control form-control-sm border-info " id="search"
+                placeholder="Buscar (Saldo, cliente, referencia, fecha)">
         </div>
     </div>
-    <div class="row">
-        <div class="col-4">
-            <button class="btn btn-danger btn-block  btn-sm" onClick="getStatus(1)">Pediente</button>
-        </div>
-        <div class="col-4">
-            <button class="btn btn-success btn-block btn-sm" onClick="getStatus(0)">Completo</button>
-        </div>
-        <div class="col-4">
-            <button class="btn btn-info btn-block btn-sm" onClick="getStatus(3)">Todo</button>
-        </div>
-    </div>
+   
     <div class="row mb-5 pb-1" id="listSales">
 
     </div>

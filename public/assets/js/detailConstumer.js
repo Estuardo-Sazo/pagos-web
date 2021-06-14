@@ -6,12 +6,14 @@ const idC = $('#idC').val();
 
 var balance = 0;
 
+
 getSale(idC, idUser);
 
 //Listamos Ventas Pendientes
 getStatus(1, idC, idUser, '#Sales1');
 //Listamos Ventas Completas
 getStatus(0, idC, idUser, '#SalesC');
+
 
 
 
@@ -29,9 +31,13 @@ function getStatus(st, id, user, ref) {
             console.log(data);
            
             if (data != null) {
+                balance = data.balance;
                 listSales(data, ref); 
             } else {
-                getCustomer(idC);
+                if (balance<=0) {
+                    
+                    getCustomer(idC);
+                }
                 }
 
         });
@@ -57,7 +63,10 @@ function getSale(id, user) {
                     updateStatusCustomer(0, idC);
                     
                 }
-                listData(data);
+                if (balance == 0) {
+                    
+                    listData(data);
+                }
                 
 
             }
@@ -155,7 +164,7 @@ function getCustomer(id) {
                 data[0].balance = 0.00;
                 data[0].customer = data[0].name;
             } else {
-                data[0].balance = 50.00;
+                data[0].balance = 1;
                 data[0].customer = data[0].name;
             }
             listData(data)

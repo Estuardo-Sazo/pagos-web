@@ -149,7 +149,7 @@ $('#credito').click(function(e) {
         })
         .then((response) => response.json())
         .then((data) => {
-            updateStatusCustomer(1, idC);
+             updateStatusCustomer(1, idC);
             location.href = "../sales";
 
         });
@@ -173,8 +173,8 @@ function getCustomer(id) {
         });
 }
 
-function updateStatusCustomer(status, user) {
-    fetch(urlCliente + '?newStatus=' + status + '&user=' + user, {
+async function updateStatusCustomer(status, user) {
+   await fetch(urlCliente + '?newStatus=' + status + '&user=' + user, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -191,3 +191,19 @@ function invertirFecha(string) {
     var info = string.split('-').reverse().join('/');
     return info;
 }
+
+//filtramos  por busqueda
+$("#search").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#listClientes tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+});
+
+//filtramos  por busqueda
+$("#search2").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#listProducto tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+});

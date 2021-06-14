@@ -12,15 +12,17 @@ include_once('../../utils/nav.php');
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Registrar pago</h5>
+                
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
+            
                 <form id="frm-pago">
                     <div class="form-group">
                         <label for="pago">Pago:</label>
-                        <input class="form-control" type="number" name="payment" id="payment">
+                        <input class="form-control" type="number" name="payment" id="payment" re>
                         <input type="hidden" name="current" id="payment">
                         <input type="hidden" id="idC" name="sale" value="<?= $_GET['id']?>">
                         <input type="hidden" id="current" name="current">
@@ -28,6 +30,11 @@ include_once('../../utils/nav.php');
                     </div>
                     <button class="btn btn-info btn-block" type="submit">Registrar</button>
                 </form>
+                <br>
+                <div id="alerta">
+
+                
+                </div>
             </div>
 
         </div>

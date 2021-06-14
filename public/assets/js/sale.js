@@ -3,6 +3,7 @@ const urlPay = "../../../api/payment_detail/";
 const idUser = localStorage.getItem('id');
 const idS = $('#idC').val();
 var f = new Date();
+var saldo = 0;
 
 
 getSale(idS, idUser);
@@ -58,6 +59,7 @@ function listData(data) {
     if (data != null) {
         data.forEach(d => {
             let cl = d.balance > 0 ? 'text-danger' : 'text-success';
+            saldo = d.balance;
             $('#current').val(d.balance);
             template += `
                     <div class="col-md-6 mt-3">
@@ -89,45 +91,55 @@ $('#frm-pago').submit(function(e) {
     data.date = f.getDate() + "/" + (f.getMonth() + 1) + "/" + f.getFullYear();
     data.time = f.getHours() + ':' + f.getMinutes();
     data.new = data.current - data.payment;
-
-    var id = data.sale;
-    const dataS = {
-        end_date: data.new == 0 ? data.date : '',
-        end_time: data.new == 0 ? data.time : '',
-        balance: data.new,
-        status: data.new == 0 ? '0' : '1'
+    
+    if (parseInt(data.payment)> parseInt(saldo)) {
+        let t = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Alerta!</strong> El monto agregado es mayor a la deuda
+    </div>`;
+        $('#alerta').html(t);
+        $('#payment').focus();
+    } else {
+        
+        var id = data.sale;
+        const dataS = {
+            end_date: data.new == 0 ? data.date : '',
+            end_time: data.new == 0 ? data.time : '',
+            balance: data.new,
+            status: data.new == 0 ? '0' : '1'
+        }
+        fetch(urlPay, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+            .then((response) => response.json())
+            .then((data) => {
+                if (data != null) {
+                    fetch(urlSale + '?PUT=&id=' + id, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify(dataS),
+                        })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            $('#modalPago').modal('hide');
+                            $('#payment').val('');
+                            $('#alerta').html('');
+                            getSale(idS, idUser);
+                            listPagos(idS);
+    
+                        });
+                } else {
+                    console.log(data);
+    
+                }
+    
+            });
     }
-    fetch(urlPay, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(data),
-        })
-        .then((response) => response.json())
-        .then((data) => {
-            if (data != null) {
-                fetch(urlSale + '?PUT=&id=' + id, {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                        },
-                        body: JSON.stringify(dataS),
-                    })
-                    .then((response) => response.json())
-                    .then((data) => {
-                        $('#modalPago').modal('hide');
-                        $('#payment').val();
-                        getSale(idS, idUser);
-                        listPagos(idS);
-
-                    });
-            } else {
-                console.log(data);
-
-            }
-
-        });
 
     e.preventDefault();
 })

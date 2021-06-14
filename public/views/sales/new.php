@@ -17,6 +17,8 @@ include_once('../../utils/nav.php');
                 </button>
             </div>
             <div class="modal-body">
+            <input type="search" class="form-control form-control-sm border-info " id="search" 
+                placeholder="Buscar Cliente ">
                 <table class="table table-striped">
                     <thead>
                         <tr>
@@ -49,6 +51,8 @@ include_once('../../utils/nav.php');
                 </button>
             </div>
             <div class="modal-body">
+            <input type="search" class="form-control form-control-sm border-info " id="search2" 
+                placeholder="Buscar Cliente ">
                 <table class="table table-striped">
                     <thead>
                         <tr>

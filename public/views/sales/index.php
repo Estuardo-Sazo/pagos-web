@@ -15,11 +15,11 @@ include_once('../../utils/nav.php');
             <h2 align="center">Ventas</h2>
         </div>
         <div class="col-md-6">
-            <h3 align="center">Total: <span id="total" class="badge badge-dark">Q500</span></h3>
+            <h3 align="center">Total: <span id="total" class="badge badge-dark">Q0</span></h3>
         </div>
     </div>
     <hr>
-    <div class="row m-2 justify-content-center">
+    <div class="row d-none m-2 justify-content-center">
         <div class="col-md-4">
             <input type="search" class="form-control form-control-sm border-info " id="search"
                 placeholder="Buscar (Saldo, cliente, referencia, fecha)">

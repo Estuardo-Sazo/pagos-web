@@ -6,10 +6,14 @@ include_once('../../utils/nav.php');
 
 ?>
 <input type="hidden" name="" id="list" value="1">
-<div class="container">
-    <div class="row mt-2 justify-content-center">
+<div class="container mt-5">
+    
+<h2 align="center">Lista de clientes</h2>
+    <hr>
+    <div class="row  m-2 justify-content-center">
         <div class="col-md-4">
-            <input type="search" class="form-control border-info inpSearch" placeholder="Buscar cliente">
+            <input type="search" class="form-control form-control-sm border-info " id="search" 
+                placeholder="Buscar ">
         </div>
     </div>
 

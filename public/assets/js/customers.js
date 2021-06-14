@@ -66,3 +66,11 @@ function getCustomers() {
             } */
         });
 }
+ 
+//filtramos  por busqueda
+$("#search").on("keyup", function() {
+    var value = $(this).val().toLowerCase();
+    $("#listCustomers .col-md-4 ").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    });
+});

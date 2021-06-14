@@ -22,7 +22,7 @@ $("#login").submit(function(e) {
                 localStorage.setItem('id', data.id);
                 localStorage.setItem('nombre', data.name);
 
-                location.href = "../inicio";
+                location.href = "../sales";
             } else {
                 $("#username").val('');
                 $("#password").val('');
